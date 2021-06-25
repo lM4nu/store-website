@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import App from './App';
+import Home from './Home';
+import Shop from './Shop';
 
-const Routes = () => {
-    return (
+class Routes extends Component {
+
+    constructor(){
+        super()
+        this.state = {}
+    }
+
+    render(){
+        return (
+
     <Router>
-        <Switch>
-            
-            <Route path="/" component={App}/>
+        <div>
 
+            <Link to="/">x</Link>
+            <Link to="/shop">z</Link>
+        </div>
+        <Switch>
+            <Route path="/home" component={Home}/>
+            <Route path="/shop" component={Shop}/>
+            <Route path="/" component={Home}/>
         </Switch>
     </Router>
 )
-
+        }
 }
 
 export default Routes;
