@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 class Home extends Component {
 
   render() {
     return (
       <div>
+        <Link to="/shop/all">Go to shop</Link>
         
       </div>
     )
