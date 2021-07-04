@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
+import Item from './Item';
 class Gallery extends Component {
 
     constructor(props){
@@ -11,13 +11,13 @@ class Gallery extends Component {
 
 
     display(category){
-            return category.forEach(obj => <h1>{obj.title}</h1>)
+            return category.map(obj => <Item data={obj}/>);
     }
 
     categoryHandler(category){
         if (category === 'all'){
             
-            return this.props.data.forEach(arr => this.display(arr))
+            return this.props.data.map(arr => this.display(arr))
         }else{
 
             const index = this.props.categories.indexOf(this.props.category);
@@ -29,7 +29,7 @@ class Gallery extends Component {
     }
 
     render() {
-        console.log(this.props.data)
+        // console.log(this.props.categories.indexOf(this.props.category))
         return (
             <div>
                 {this.props.category} 

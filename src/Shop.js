@@ -8,7 +8,7 @@ class Shop extends Component {
             fetching : true,
             products : [],
             categories: ['all'],
-            currentcat : this.props.match.params.id 
+            currentcat : this.props.match.params.id ? this.props.match.params.id : 'all'
         }
     }
 
@@ -59,7 +59,7 @@ class Shop extends Component {
                 <ul>
                     {this.state.categories.map( (cat,i) => <li key={i}><Link to={`/shop/${cat}`}> {cat} </Link></li>)}
                 </ul>
-                <Gallery category={this.props.match.params.id} categories={this.state.categories}data={this.state.products}/>
+                <Gallery category={this.props.match.params.id} categories={this.state.categories} data={this.state.products}/>
             </div>
         )
         }

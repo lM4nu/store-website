@@ -18,6 +18,7 @@ class Routes extends Component {
         <Switch>
             <Route path="/home" component={Home}/>
             <Route path="/shop/:id" component={Shop}/>
+            {/* <Route path="/shop" component={Shop}/> */}
             <Route path="/" component={Home}/>
         </Switch>
     </Router>
