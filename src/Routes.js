@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import Gallery from './Gallery';
 import Home from './Home';
 import Shop from './Shop';
+import "./App.css";
 
 class Routes extends Component {
 

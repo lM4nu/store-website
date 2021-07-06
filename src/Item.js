@@ -10,7 +10,8 @@ class Item extends Component {
     render(){
         console.log(this.props.data)
         return(
-            <div>
+            <div className="item">
+                <img className="item-img"src={this.props.data.image}/>
                 {this.props.data.title}
             </div>
         )

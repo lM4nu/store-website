@@ -16,10 +16,10 @@ class Shop extends Component {
     getData = async () => {
         console.log('getting data')
 
-        const catResponse = await fetch("https://fakestoreapi.com/products/categories")
-        const categories = await catResponse.json()
+        const catResponse = await fetch("https://fakestoreapi.com/products/categories");
+        const categories = await catResponse.json();
 
-        categories.forEach( cat => this.state.categories.push(cat))
+        categories.forEach( cat => this.state.categories.push(cat));
         this.setState(prevState => ({
             categories : prevState.categories
         }))
@@ -44,8 +44,8 @@ class Shop extends Component {
 
 
     render(){
-        console.log(this.state)
-        console.log(this.props.match.params.id)
+        console.log(this.state);
+        console.log(this.props.match.params.id);
         if( this.state.fetching) {
             return(
                 <div>
@@ -54,12 +54,20 @@ class Shop extends Component {
             ) ;
         }else {
         return(
-            <div>
+            <div className="shop">
+                <div className="bar">
                 <h1>categories</h1>
-                <ul>
-                    {this.state.categories.map( (cat,i) => <li key={i}><Link to={`/shop/${cat}`}> {cat} </Link></li>)}
+                <ul className="cat-list">
+                    {this.state.categories.map( (cat,i) => <li className="cat-list-item" key={i}><Link style={{textDecoration:'none', color:'black'}}to={`/shop/${cat}`}> {cat} </Link></li>)}
                 </ul>
+
+                </div>
+
+                <div className="panel-container">
+                {this.props.match.params.id}  
                 <Gallery category={this.props.match.params.id} categories={this.state.categories} data={this.state.products}/>
+
+                </div>
             </div>
         )
         }

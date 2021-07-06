@@ -23,18 +23,12 @@ class Gallery extends Component {
             const index = this.props.categories.indexOf(this.props.category);
             return this.display(this.props.data[index-1]);
         }
-
-
-
     }
 
     render() {
-        // console.log(this.props.categories.indexOf(this.props.category))
         return (
-            <div>
-                {this.props.category} 
+            <div className="item-container">
                 {this.categoryHandler(this.props.category)}
-
             </div>
         )
     }
