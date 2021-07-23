@@ -14,7 +14,6 @@ class Routes extends Component {
 
     render(){
         return (
-
     <Router>
         <Switch>
             <Route path="/home" component={Home}/>

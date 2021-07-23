@@ -8,10 +8,9 @@ class Item extends Component {
 
 
     render(){
-        console.log(this.props.data)
         return(
-            <div className="item">
-                <img className="item-img"src={this.props.data.image}/>
+            <div onClick={this.props.switchCard} className="item">
+                <img className="item-img"src={this.props.data.image} alt={this.props.data.title}/>
                 {this.props.data.title}
             </div>
         )

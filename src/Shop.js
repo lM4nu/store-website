@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Gallery from './Gallery';
+import CartBar from './CartBar';
+import Cart from './Cart';
 import { Link } from 'react-router-dom';
 class Shop extends Component {
     constructor(props){
@@ -8,14 +10,14 @@ class Shop extends Component {
             fetching : true,
             products : [],
             categories: ['all'],
-            currentcat : this.props.match.params.id ? this.props.match.params.id : 'all'
+            currentcat : this.props.match.params.id ? this.props.match.params.id : 'all',
+            showCart : false,
+            cart : []
         }
     }
 
 
     getData = async () => {
-        console.log('getting data')
-
         const catResponse = await fetch("https://fakestoreapi.com/products/categories");
         const categories = await catResponse.json();
 
@@ -34,7 +36,7 @@ class Shop extends Component {
         this.setState(prevState => ({
             products : prevState.products,
             fetching : false
-        }),  () => console.log(this.state))
+        }))
 
     }
 
@@ -43,9 +45,39 @@ class Shop extends Component {
     }
 
 
+    showCart = (e) => {
+        if(this.state.showCart){
+            this.setState({
+                showCart : false
+            })
+        }else{
+            this.setState({
+                showCart : true
+        })
+    }
+    }
+
+    addToCart = (productData) => {
+        let exists = false;
+        this.state.cart.forEach(arr => {
+            if(arr[0] === productData){
+                arr[1]++;
+                exists = true;
+            }
+        })
+
+        if(!exists){
+            this.state.cart.push([productData,1])
+        }
+
+        this.setState( prevState => ({
+            cart : prevState.cart
+        }))
+
+    }
+
+
     render(){
-        console.log(this.state);
-        console.log(this.props.match.params.id);
         if( this.state.fetching) {
             return(
                 <div>
@@ -56,16 +88,16 @@ class Shop extends Component {
         return(
             <div className="shop">
                 <div className="bar">
-                <h1>categories</h1>
-                <ul className="cat-list">
-                    {this.state.categories.map( (cat,i) => <li className="cat-list-item" key={i}><Link style={{textDecoration:'none', color:'black'}}to={`/shop/${cat}`}> {cat} </Link></li>)}
-                </ul>
-
+                    <h1 style={{textAlign:'center'}}>categories</h1>
+                    <ul className="cat-list">
+                        {this.state.categories.map( (cat,i) => <li className={cat === this.props.match.params.id ? 'cat-list-item-active' : 'cat-list-item'} key={i}><Link style={{textDecoration:'none', color:'black'}}to={`/shop/${cat}`}> {cat} </Link></li>)}
+                    </ul>
                 </div>
 
                 <div className="panel-container">
-                {this.props.match.params.id}  
-                <Gallery category={this.props.match.params.id} categories={this.state.categories} data={this.state.products}/>
+                <CartBar showCart={this.showCart}/>
+                <Gallery category={this.props.match.params.id} categories={this.state.categories} data={this.state.products} addToCart={this.addToCart}/>
+                {this.state.showCart ? <Cart showCart={this.showCart} data={this.state.cart}/> : null}
 
                 </div>
             </div>
