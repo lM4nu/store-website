@@ -76,6 +76,40 @@ class Shop extends Component {
 
     }
 
+    removeFromCart = (product) => {
+
+        this.state.cart.forEach((arr,index) => {
+            if(arr[0] === product){
+                console.log(arr)
+                this.state.cart.splice(index,1);
+
+                this.setState( prevState => ({
+                    cart : prevState.cart
+                }))
+                console.log(this.state.cart)
+            }
+        })
+
+    }
+
+    editCart = (product,operation) =>{
+            this.state.cart.forEach(arr => {
+                if(arr[0] === product) {
+                    if(operation === "add"){
+                        arr[1]++;
+                    }else{
+                        if(arr[1] > 1){
+                        arr[1]--;
+                        }
+                    }
+                }
+            })
+
+            this.setState(prevState => ({
+                cart : prevState.cart
+            }))
+
+        }
 
     render(){
         if( this.state.fetching) {
@@ -97,7 +131,7 @@ class Shop extends Component {
                 <div className="panel-container">
                 <CartBar showCart={this.showCart}/>
                 <Gallery category={this.props.match.params.id} categories={this.state.categories} data={this.state.products} addToCart={this.addToCart}/>
-                {this.state.showCart ? <Cart showCart={this.showCart} data={this.state.cart}/> : null}
+                {this.state.showCart ? <Cart showCart={this.showCart} data={this.state.cart} removeFromCart={this.removeFromCart} editCart={this.editCart}/> : null}
 
                 </div>
             </div>
